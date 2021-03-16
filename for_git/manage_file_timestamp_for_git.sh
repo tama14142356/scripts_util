@@ -1,16 +1,21 @@
 #!/bin/bash
-if [ "$#" -gt 0 ]; then
+IFS=$'\n'
+root_dir=$(git rev-parse --show-toplevel 2> tmp.txt)
+rm tmp.txt
+if [ -z "$root_dir" ]; then
     git init
-    # shellcheck disable=SC2046,SC2012
-    oldest_file_name=$(ls -1atrd $(find "$(pwd)" -type f -not -path "*/.git/*") | head -1)
+fi
+pushd "$root_dir" || exit
+file_list=$(find "$(pwd)" -type f -not -path "*/.git/*")
+is_first_commit=$(git branch)
+if [ -z "$is_first_commit" ]; then
+    # shellcheck disable=SC2086,2012
+    oldest_file_name=$(ls -1atrd $file_list | head -1)
     date_info=$(date -r "$oldest_file_name" '+%Y-%m-%dT%H:%M:%S%z')
     GIT_COMMITTER_DATE=\"$date_info\" git commit --allow-empty -m "first commit" --date "$date_info"
 fi
-root_dir_name=$(git rev-parse --show-toplevel)
-pushd "$root_dir_name" || exit
-
-# shellcheck disable=SC2046
-old_file_list=$(ls -1atrd $(find "$root_dir_name" -type f -not -path "*/.git/*"))
+# shellcheck disable=SC2086
+old_file_list=$(ls -1atrd $file_list)
 for file in ${old_file_list}; do
     echo "$file"
     date_info=$(date -r "$file" '+%Y-%m-%dT%H:%M:%S%z')
