@@ -1,6 +1,6 @@
 #!/bin/bash
 IFS=$'\n'
-root_dir=$(git rev-parse --show-toplevel 2> tmp.txt)
+root_dir=$(git rev-parse --show-toplevel 2>tmp.txt)
 rm tmp.txt
 if [ -z "$root_dir" ]; then
     git init
@@ -18,9 +18,13 @@ fi
 old_file_list=$(ls -1atrd $file_list)
 for file in ${old_file_list}; do
     echo "$file"
-    date_info=$(date -r "$file" '+%Y-%m-%dT%H:%M:%S%z')
-    git add "$file"
-    git_relative_path=$(git ls-files "$file" --full-name)
+    base_name=$(basename "$file")
+    dir_name=$(dirname "$file")
+    pushd "$dir_name" || exit
+    date_info=$(date -r "$base_name" '+%Y-%m-%dT%H:%M:%S%z')
+    git add "$base_name"
+    git_relative_path=$(git ls-files "$base_name" --full-name)
+    popd || exit
     if [ -f "$git_relative_path" ]; then
         GIT_COMMITTER_DATE=\"$date_info\" git commit -m "feat: add $git_relative_path" --date "$date_info"
     fi
