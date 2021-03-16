@@ -1,4 +1,5 @@
 #!/bin/bash
+IFS=$'\n'
 git_files=$(git ls-files)
 
 for FILE in ${git_files}; do
