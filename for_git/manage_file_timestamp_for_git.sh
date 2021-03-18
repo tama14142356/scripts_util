@@ -11,7 +11,7 @@ is_first_commit=$(git branch)
 if [ -z "$is_first_commit" ]; then
     # shellcheck disable=SC2086,2012
     oldest_file_name=$(ls -1atrd $file_list | head -1)
-    date_info=$(date -r "$oldest_file_name" '+%Y-%m-%dT%H:%M:%S%z')
+    date_info=$(date -r "$oldest_file_name" '+%Y-%m-%dT%H:%M:%S%:z') # iso 8601 format
     GIT_COMMITTER_DATE=\"$date_info\" git commit --allow-empty -m "first commit" --date "$date_info"
 fi
 # shellcheck disable=SC2086
@@ -20,13 +20,23 @@ for file in ${old_file_list}; do
     echo "$file"
     base_name=$(basename "$file")
     dir_name=$(dirname "$file")
+    is_ignore=$(
+        cd "$dir_name" || exit
+        git ls-files "$base_name" --other --ignored --exclude-standard
+    )
+    if [ -n "$is_ignore" ]; then
+        continue
+    fi
     pushd "$dir_name" || exit
-    date_info=$(date -r "$base_name" '+%Y-%m-%dT%H:%M:%S%z')
-    git add "$base_name"
-    git_relative_path=$(git ls-files "$base_name" --full-name)
-    popd || exit
-    if [ -f "$git_relative_path" ]; then
+    is_tracked=$(git ls-files "$base_name")
+    is_change=$(git diff "$base_name")
+    if [ -z "$is_tracked" ] || [ -n "$is_change" ]; then
+        date_info=$(date -r "$base_name" '+%Y-%m-%dT%H:%M:%S%:z') # iso 8601 format
+        printf '%s\t%s\n' "$date_info" "$file"
+        git add "$base_name"
+        git_relative_path=$(git ls-files "$base_name" --full-name)
         GIT_COMMITTER_DATE=\"$date_info\" git commit -m "feat: add $git_relative_path" --date "$date_info"
     fi
+    popd || exit
 done
 popd || exit
