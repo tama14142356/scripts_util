@@ -15,6 +15,7 @@ else
     for root_dir in ${under_git_dirs}; do
         temp_dir=$(dirname "$root_dir")
         pushd "$temp_dir" || exit
+        bash "$SCRIPT_DIR"/restore_timestamp.sh
         bash "$SCRIPT_DIR"/manage_file_timestamp_for_git.sh
         popd || exit
     done
