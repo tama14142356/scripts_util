@@ -9,6 +9,7 @@
 現在いるフォルダ内で使用可能  
 そのファルダ内でパターンに一致するファイル名を一括変換できる  
 使い方は以下  
+
 ```
 $ cd ~/rename_dir
 ~/rename_dir $ ls
@@ -22,6 +23,7 @@ rename.sh valkkk_tmp1.txt valkkk_tmp2.txt valkkk_tmp3.txt
 現在いるフォルダ内で使用可能  
 そのファルダ内でパターンに一致するファイル名の前半と後半を入れ替える  
 使い方は以下  
+
 ```
 $ cd ~/rename_dir
 ~/rename_dir $ ls
@@ -30,6 +32,10 @@ rename_extend.sh testkkk_tmp1.txt testkkk_tmp2.txt testkkk_tmp3.txt
 ~/rename_dir $ ls
 rename_extend.sh tmp1_testkkk.txt tmp2_testkkk.txt tmp3_testkkk.txt
 ```
+
+## time_bash.sh
+時間計測のテンプレートファイル  
+`# iroiro`の部分に測定したい処理を書けばその処理全体の時間が出力できる。
 
 
 # git用スクリプトディレクトリ(for_git)
