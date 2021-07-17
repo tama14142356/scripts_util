@@ -10,12 +10,12 @@ mylist.txt内に書かれたパスにある動画をその順番に結合する�
 1. mylist.txtの中身を結合したい動画のパスに書き換える（~などは使えません。絶対パスを入力してください）
 1. 以下を実行
 
-```
-$ ls
-mylist.txt cat_video.sh
-$ bash cat_video.sh
-$ ls
-mylist.txt cat_video.sh output.mp4
-```
+    ```
+    $ ls
+    mylist.txt cat_video.sh
+    $ bash cat_video.sh
+    $ ls
+    mylist.txt cat_video.sh output.mp4
+    ```
 
 1. `output.mp4`が結合された動画なので、これが作成されていれば完了
