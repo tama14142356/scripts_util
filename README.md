@@ -34,3 +34,7 @@ rename_extend.sh tmp1_testkkk.txt tmp2_testkkk.txt tmp3_testkkk.txt
 
 # git用スクリプトディレクトリ(for_git)
 gitでファイルの更新日管理したいという変なことをしたい場合に使うスクリプト
+
+
+# video(ffmpeg)用スクリプトディレクトリ(for_video)
+ffmpegを使った処理をしたいときに使うスクリプトをまとめたもの
