@@ -5,7 +5,7 @@ SCRIPT_DIR=$(
 )
 server_name="$1"
 is_open_browser=true
-if [ "$#" -gt 0 ]; then
+if [ "$#" -gt 1 ]; then
     is_open_browser=false
 fi
 localport=1080
