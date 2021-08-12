@@ -7,21 +7,17 @@ if [ "$#" -lt 1 ] || [ "$#" -gt 3 ]; then
 fi
 
 user_name="$3"
+if [ -z "$user_name" ]; then
+    user_name="$(whoami)"
+fi
 
-if [ "$user_name" ]; then
-    process=$(pgrep -u "$user_name" -f "$1")
-    if [ "$#" -gt 1 ]; then
-        process=$(pgrep -u "$user_name" "$1" "$2")
-    fi
-else
-    process=$(pgrep -f "$1")
-    if [ "$#" -gt 1 ]; then
-        process=$(pgrep "$1" "$2")
-    fi
+process=$(pgrep -u "$user_name" -f "$1")
+if [ "$#" -gt 1 ]; then
+    process=$(pgrep -u "$user_name" "$1" "$2")
 fi
 
 # bashファイル起動によるコマンドの除外
-bash_process=$(pgrep -f "bash")
+bash_process=$(pgrep -u "$user_name" -f "bash")
 for pid in ${bash_process}; do
     process=$(echo "$process" | grep -v "$pid")
 done
