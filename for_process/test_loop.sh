@@ -2,9 +2,10 @@
 #引数の数だけループさせる
 while true
 do
-  sleep 1
-  date_str=$(date)
+  sleep 10
+  # date_str=$(date)
   # echo "$date_str"
+  qstat
 done
 # for i in $(seq 1 ${#}); do
 #     echo 'looping: '
