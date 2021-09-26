@@ -33,10 +33,8 @@ rename_extend.sh testkkk_tmp1.txt testkkk_tmp2.txt testkkk_tmp3.txt
 rename_extend.sh tmp1_testkkk.txt tmp2_testkkk.txt tmp3_testkkk.txt
 ```
 
-## time_bash.sh
-時間計測のテンプレートファイル  
-`# iroiro`の部分に測定したい処理を書けばその処理全体の時間が出力できる。
-
+# for_time 
+時間に関するスクリプト
 
 # git用スクリプトディレクトリ(for_git)
 gitでファイルの更新日管理したいという変なことをしたい場合に使うスクリプト
@@ -44,3 +42,9 @@ gitでファイルの更新日管理したいという変なことをしたい�
 
 # video(ffmpeg)用スクリプトディレクトリ(for_video)
 ffmpegを使った処理をしたいときに使うスクリプトをまとめたもの
+
+# for_process
+プロセス管理に関する雑多な処理のあつまり
+
+# for_ssh
+ssh, sshfsなどのsshコマンドに関連したスクリプト
