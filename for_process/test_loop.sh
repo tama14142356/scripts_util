@@ -24,3 +24,15 @@ done
 #     # kill "${1}"
 #     shift #shift
 # done
+
+# gpus=10
+# tmp=""
+# for i in $(seq 1 ${gpus}); do
+#     ii=$(($i-1))
+#     tmp+="$ii"
+#     if [ $i -lt $gpus ];then
+#         tmp+=","
+#     fi
+# done
+# echo "$tmp"
+
