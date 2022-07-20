@@ -24,7 +24,7 @@ cd "$new_year"
 sudo wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
 # sudo curl -L -O http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
 
-sudo sh update_tlmgr-latest.sh -- --upgrade
+sudo sh update-tlmgr-latest.sh -- --upgrade
 
 if [ "$is_update" = "update" ];then
     sudo tlmgr update --self --all
