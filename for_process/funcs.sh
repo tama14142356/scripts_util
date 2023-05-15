@@ -19,7 +19,9 @@ pycache_clean(){
     pycache_dirs=$(find "$tar_dir" -type d -name "__pycache__")
     for d in ${pycache_dirs};
     do
-        rm -rf "$d"
+        rm -rf -- "$d"
+        p_d=$(dirname "$d")
+        rmdir "$p_d"
     done
     popd
     set +x
