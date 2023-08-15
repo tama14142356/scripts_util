@@ -12,8 +12,10 @@ pyenv () {
         for venv_name in ${venvs};do
             # echo "$venv_name"
             py_cmd=${venv_name}/Scripts/python
-            py_version=$(${py_cmd} -V)
-            echo "$py_version"" : ""$(basename "$venv_name")"
+            if [ -f "$py_cmd" ]; then
+                py_version=$(${py_cmd} -V)
+                echo "$py_version"" : ""$(basename "$venv_name")"
+            fi
         done
     elif [ "$cmd" = "venv" ] || [ "$cmd" = "virtualenv" ]; then
         if [ -d "$venv_root/$venv_name" ]; then
