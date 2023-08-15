@@ -27,6 +27,8 @@ pyenv () {
         else
             echo "please install python for win"
         fi
+    elif [ "$cmd" = "activate_adjust" ]; then
+        venv_activate_rename_path "$venv_root/$venv_name"
     elif [ "$cmd" = "delete" ]; then
         if [ -d "$venv_root/$venv_name" ];then
             set -x
@@ -74,6 +76,7 @@ venv_activate_rename_path () {
 
 
 # pyenv venv "test_venv_37" 3.7
-pyenv "versions"
+# pyenv "versions"
 # pyenv delete "ttt"
 # pyenv delete "tmp_venv"
+pyenv "$1" "$2" "$3" "$4"
