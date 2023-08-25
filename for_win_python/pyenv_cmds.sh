@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pyenv () {
+pyenv_func () {
     cmd=${1:-"versions"}
     venv_name=${2:-"test_venv"}
     py_ver=${3:-"3.8"}
@@ -26,6 +26,7 @@ pyenv () {
         then
             py -"$py_ver" -m venv "$venv_root/$venv_name"
             venv_activate_rename_path "$venv_root/$venv_name"
+            echo "success create $venv_name !!!"
         else
             echo "please install python for win"
         fi
@@ -39,6 +40,8 @@ pyenv () {
         else
             echo "no found venv \"$venv_name\""
         fi
+    else
+        echo "no found command $cmd !!"
     fi
 
 }
@@ -76,9 +79,15 @@ venv_activate_rename_path () {
     fi
 }
 
+cmd=${1:-"versions"}
+venv_name=${2:-"test_venv"}
+py_ver=${3:-"3.8"}
+venv_root=${4:-"$HOME/Documents/python_venvs"}
+
+pyenv_func "$cmd" "$venv_name" "$py_ver" "$venv_root"
 
 # pyenv venv "test_venv_37" 3.7
 # pyenv "versions"
 # pyenv delete "ttt"
 # pyenv delete "tmp_venv"
-pyenv "$1" "$2" "$3" "$4"
+# pyenv "$1" "$2" "$3" "$4"
