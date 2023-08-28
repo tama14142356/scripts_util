@@ -4,8 +4,8 @@ set -eu
 
 pyenv_func () {
     cmd=${1:-"versions"}
-    venv_name=${2:-"test_venv"}
-    py_ver=${3:-"3.8"}
+    py_ver=${2:-"3.8"}
+    venv_name=${3:-"test_venv"}
     venv_root=${4:-"$HOME/Documents/python_venvs"}
 
     if [ "$cmd" = "versions" ]; then
@@ -35,6 +35,10 @@ pyenv_func () {
     elif [ "$cmd" = "activate_adjust" ]; then
         venv_activate_rename_path "$venv_root/$venv_name"
     elif [ "$cmd" = "delete" ]; then
+        # pyenv delete venv_name py_ver venv_root
+        tmp_name="$venv_name"
+        venv_name="$py_ver"
+        py_ver="$tmp_name"
         if [ -d "$venv_root/$venv_name" ];then
             set -x
             rm -rf "$venv_root/$venv_name"
