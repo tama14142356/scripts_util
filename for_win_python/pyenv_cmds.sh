@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 pyenv_func () {
     cmd=${1:-"versions"}
     venv_name=${2:-"test_venv"}
