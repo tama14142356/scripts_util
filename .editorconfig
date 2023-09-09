@@ -16,7 +16,7 @@ indent_style = space
 indent_size = 4
 indent_style = space
 
-[*.sh]
+[*.{sh,bash}]
 indent_size = 4
 indent_style = space
 
@@ -29,7 +29,8 @@ tab_width = 4
 indent_style = tab
 
 # FOR WINDOWS
-[*.{cmd,bat}]
+[*.{cmd,bat,vbs}]
 end_of_line = crlf
 indent_size = 4
 indent_style = space
+# charset = shift-jis
